@@ -131,12 +131,12 @@ downloadBtn.addEventListener('click', () => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
-  // Ukuran gambar di grid
-  const imgW = 300; // dikurangi dari 360
-  const imgH = 400; // dikurangi dari 480
-  const paddingX = 30;
-  const paddingY = 30;
-  const textSpace = selectedFrame === 'birthday' ? 100 : 40;
+  // Ukuran gambar lebih kecil biar frame kelihatan
+  const imgW = 240;
+  const imgH = 320;
+  const paddingX = 50;
+  const paddingY = 50;
+  const textSpace = selectedFrame === 'birthday' ? 100 : 60;
 
   const cols = 2;
   const rows = Math.ceil(capturedImages.length / cols);
@@ -144,17 +144,17 @@ downloadBtn.addEventListener('click', () => {
   canvas.width = (imgW + paddingX) * cols + paddingX;
   canvas.height = textSpace + (imgH + paddingY) * rows + paddingY;
 
-  // Background
+  // Background/frame warna
   if (selectedFrame === 'birthday') {
     ctx.fillStyle = '#32004b';
   } else if (selectedFrame === 'white') {
     ctx.fillStyle = '#ffffff';
   } else {
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = '#000000'; // frame default
   }
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Tambahkan teks "Happy Birthday"
+  // Teks Happy Birthday
   if (selectedFrame === 'birthday') {
     ctx.fillStyle = 'gold';
     ctx.font = 'bold 36px Arial';
@@ -177,7 +177,7 @@ downloadBtn.addEventListener('click', () => {
       // Gambar foto
       ctx.drawImage(img, x, y, imgW, imgH);
 
-      // Tambahkan border putih kalau frame 'white'
+      // Kalau frame putih, kasih border putih
       if (selectedFrame === 'white') {
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 8;
@@ -195,9 +195,9 @@ downloadBtn.addEventListener('click', () => {
   });
 });
 
-
 // MULAI TOMBOL
 startBtn.addEventListener('click', startCapture);
+
 
 
 
