@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photobox Retro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main>
+
+  <h2>📸 Web Photobox</h2>
+
+  <div id="frameSelection">
+    <p>Pilih Frame:</p>
+    <button class="frameOption" data-frame="default">🖼️ Frame hitam</button>
+    <button class="frameOption" data-frame="birthday">🎂 Ungu (Ulang Tahun)</button>
+    <button class="frameOption" data-frame="white">⬜ Frame putih</button>
+  </div>
+
+  <video id="camera" autoplay playsinline class="hidden"></video>
+  <div id="countdown" class="hidden">5</div>
+  <button id="startBtn" class="hidden">Mulai Ambil Foto</button>
+  <div id="penjelasan" class="hidden"><p>Penjelasan frame:<br>
+  warna border foto hanya muncul di hasil foto, jika di download maka tidak ada border di fotonya, hasil foto yang di download polos sesuai warna frame yg dipilih
+  <br><br> selamat menggunakan
+  </p></div>
+
+  <div class="frame hidden" id="photoFrame">
+    <div id="photoGrid" class="grid"></div>
+  </div>
+
+  <button id="downloadBtn" class="hidden">Download Foto</button>
+  <button id="backBtn" class="hidden">Kembali ke Pilih Frame</button>
+
+</main>
+
+  <footer>
+  <p>Beri saran dan masukan<br>
+     Follow creator:</p>
+  <a href="https://www.instagram.com/marcjr8_/" target="_blank">
+    @marcjr8_
+  </a>
+</footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
