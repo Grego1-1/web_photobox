@@ -1,4 +1,12 @@
 const video = document.getElementById('camera');
+// Akses kamera
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => {
+    video.srcObject = stream;
+    video.style.transform = 'none'; // <--- TAMBAHIN INI BIAR TIDAK MIRROR
+  })
+  .catch(err => alert("Gagal akses kamera: " + err.message));
+
 const countdown = document.getElementById('countdown');
 const startBtn = document.getElementById('startBtn');
 const grid = document.getElementById('photoGrid');
@@ -203,6 +211,7 @@ downloadBtn.addEventListener('click', () => {
 
 // MULAI TOMBOL
 startBtn.addEventListener('click', startCapture);
+
 
 
 
