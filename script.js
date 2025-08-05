@@ -52,9 +52,15 @@ function capturePhoto() {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   const ctx = canvas.getContext('2d');
+
+  // Flip horizontal biar ga mirror
+  ctx.translate(canvas.width, 0);
+  ctx.scale(-1, 1);
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
   return canvas.toDataURL('image/jpeg');
 }
+
 
 // START
 async function startCapture() {
@@ -197,6 +203,7 @@ downloadBtn.addEventListener('click', () => {
 
 // MULAI TOMBOL
 startBtn.addEventListener('click', startCapture);
+
 
 
 
