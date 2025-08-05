@@ -131,18 +131,20 @@ downloadBtn.addEventListener('click', () => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
-  const imgW = 360;
-  const imgH = 480;
+  // Ukuran gambar di grid
+  const imgW = 300; // dikurangi dari 360
+  const imgH = 400; // dikurangi dari 480
   const paddingX = 30;
   const paddingY = 30;
+  const textSpace = selectedFrame === 'birthday' ? 100 : 40;
+
   const cols = 2;
   const rows = Math.ceil(capturedImages.length / cols);
-  const titleHeight = selectedFrame === 'birthday' ? 100 : 0;
 
-  canvas.width = cols * (imgW + paddingX) + paddingX;
-  canvas.height = titleHeight + rows * (imgH + paddingY) + paddingY;
+  canvas.width = (imgW + paddingX) * cols + paddingX;
+  canvas.height = textSpace + (imgH + paddingY) * rows + paddingY;
 
-  // Set background
+  // Background
   if (selectedFrame === 'birthday') {
     ctx.fillStyle = '#32004b';
   } else if (selectedFrame === 'white') {
@@ -152,37 +154,33 @@ downloadBtn.addEventListener('click', () => {
   }
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Teks Happy Birthday
+  // Tambahkan teks "Happy Birthday"
   if (selectedFrame === 'birthday') {
     ctx.fillStyle = 'gold';
-    ctx.font = 'bold 48px Arial';
+    ctx.font = 'bold 36px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('🎉 Happy Birthday! 🎉', canvas.width / 2, 70);
+    ctx.fillText('🎉 Happy Birthday! 🎉', canvas.width / 2, 60);
   }
 
-  // Load dan render gambar
   let loaded = 0;
+
   capturedImages.forEach((src, i) => {
     const img = new Image();
     img.src = src;
     const col = i % cols;
     const row = Math.floor(i / cols);
+
     img.onload = () => {
       const x = paddingX + col * (imgW + paddingX);
-      const y = titleHeight + paddingY + row * (imgH + paddingY);
+      const y = textSpace + paddingY + row * (imgH + paddingY);
 
+      // Gambar foto
       ctx.drawImage(img, x, y, imgW, imgH);
 
-      // Border/frame efek
-      if (selectedFrame === 'birthday') {
-        ctx.strokeStyle = 'orange';
-        ctx.lineWidth = 5;
-        ctx.strokeRect(x, y, imgW, imgH);
-      } else if (selectedFrame === 'white') {
-        // no border
-      } else {
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 4;
+      // Tambahkan border putih kalau frame 'white'
+      if (selectedFrame === 'white') {
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 8;
         ctx.strokeRect(x, y, imgW, imgH);
       }
 
@@ -197,7 +195,9 @@ downloadBtn.addEventListener('click', () => {
   });
 });
 
+
 // MULAI TOMBOL
 startBtn.addEventListener('click', startCapture);
+
 
 
