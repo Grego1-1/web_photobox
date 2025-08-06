@@ -3,7 +3,9 @@ const video = document.getElementById('camera');
 navigator.mediaDevices.getUserMedia({ video: true })
   .then(stream => {
     video.srcObject = stream;
-    video.style.transform = 'none'; // <--- TAMBAHIN INI BIAR TIDAK MIRROR
+    video.style.transform = 'none';
+video.style.webkitTransform = 'none';
+video.style.scale = '1';
   })
   .catch(err => alert("Gagal akses kamera: " + err.message));
 
@@ -239,6 +241,7 @@ backBtn.addEventListener('click', () => {
   downloadBtn.classList.add('hidden');
   video.classList.add('hidden');
 });
+
 
 
 
