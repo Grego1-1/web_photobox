@@ -11,6 +11,10 @@ h2 {
   margin-bottom: 20px;
 }
 
+video {
+  transform: none; /* normal (nggak mirror) */
+}
+
 #camera {
   width: 90vw;
   max-width: 400px;
@@ -144,4 +148,5 @@ footer a {
 footer a:hover {
   background-color: #cc00cc;
 }
+
 
