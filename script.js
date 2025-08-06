@@ -19,12 +19,29 @@ const penjelasan = document.getElementById('penjelasan');
 let selectedFrame = "default";
 let capturedImages = [];
 
-// Akses kamera
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then(stream => {
-    video.srcObject = stream;
-  })
-  .catch(err => alert("Gagal akses kamera: " + err.message));
+// ✅ Fungsi untuk minta akses kamera
+function requestCameraAccess() {
+  return navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      video.srcObject = stream;
+      video.style.transform = 'none'; // Non-mirror preview
+    })
+    .catch(err => {
+      alert("Gagal akses kamera: " + err.message);
+    });
+}
+
+// ✅ Panggil akses kamera setiap kali halaman dimuat
+window.addEventListener('load', () => {
+  requestCameraAccess();
+});
+
+// ✅ Matikan kamera saat user keluar/tab ditutup
+window.addEventListener('beforeunload', () => {
+  if (video.srcObject) {
+    video.srcObject.getTracks().forEach(track => track.stop());
+  }
+});
 
 // FRAME SELECT
 document.querySelectorAll('.frameOption').forEach(btn => {
@@ -211,6 +228,18 @@ downloadBtn.addEventListener('click', () => {
 
 // MULAI TOMBOL
 startBtn.addEventListener('click', startCapture);
+
+// ✅ Back button (balik ke pemilihan frame)
+backBtn.addEventListener('click', () => {
+  frameSelection.classList.remove('hidden');
+  startBtn.classList.add('hidden');
+  backBtn.classList.add('hidden');
+  penjelasan.classList.add('hidden');
+  photoFrame.classList.add('hidden');
+  downloadBtn.classList.add('hidden');
+  video.classList.add('hidden');
+});
+
 
 
 
